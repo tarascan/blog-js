@@ -2,7 +2,17 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const userShema = new Schema({
-  username: {
+  nickname: {
+    type: String,
+    unique: true,
+    required: true,
+  },
+  email: {
+    type: String,
+    unique: true,
+    required: true,
+  },
+  passwordHash: {
     type: String,
     required: true,
   },
@@ -14,9 +24,9 @@ const userShema = new Schema({
     Editor: Number,
     Admin: Number,
   },
-  password: {
-    type: String,
-    required: true,
+  isActivated: {
+    type: Boolean,
+    default: false,
   },
   refreshToken: String,
 });
