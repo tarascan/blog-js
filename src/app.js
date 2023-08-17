@@ -3,7 +3,6 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const verifyJWT = require('./middlewares/verifyJWT');
-const { verify } = require('crypto');
 const cookieParser = require('cookie-parser');
 const connectDB = require('./config/dbConn');
 const app = express();

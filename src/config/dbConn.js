@@ -1,4 +1,3 @@
-const eslintPluginPrettier = require('eslint-plugin-prettier');
 const mongoose = require('mongoose');
 
 const connectDB = async () => {

@@ -11,20 +11,22 @@ const handleRefreshToken = async (req, res) => {
   // Detected refresh token reuse!
   if (!foundUser) return res.sendStatus(403); // Forbidden
 
-  // evaluate jwt
+  // Evaluate jwt
+
   jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, decoded) => {
-    if (err || foundUser.username !== decoded.username)
-      return res.sendStatus(403);
+    if (err || foundUser.email !== decoded.email) return res.sendStatus(403);
+    const nickname = foundUser.nickname;
     const roles = Object.values(foundUser.roles);
     const accessToken = jwt.sign(
       {
         UserInfo: {
-          username: decoded.username,
+          nickname: nickname,
+          email: decoded.email,
           roles: roles,
         },
       },
       process.env.ACCESS_TOKEN_SECRET,
-      { expiresIn: '30s' }
+      { expiresIn: '15m' }
     );
     res.json({ accessToken });
   });

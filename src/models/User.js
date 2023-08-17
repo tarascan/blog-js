@@ -24,10 +24,6 @@ const userShema = new Schema({
     Editor: Number,
     Admin: Number,
   },
-  isActivated: {
-    type: Boolean,
-    default: false,
-  },
   refreshToken: String,
 });
 
