@@ -12,7 +12,7 @@ const handleLogin = async (req, res) => {
     return res.status(400).json({ message: 'Password is required' });
 
   if (/@/g.test(login)) {
-    // Login via Email
+    // Authentication via Email
     // Сheck if Email exists in the database
 
     const email = login;
@@ -63,7 +63,7 @@ const handleLogin = async (req, res) => {
         .json({ message: 'Login not found or incorrect password' });
     }
   } else {
-    // Login via Nickname
+    // Authentication via Nickname
     // Сheck if Nickname exists in the database
 
     const nickname = login;

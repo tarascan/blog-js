@@ -24,6 +24,11 @@ const userShema = new Schema({
     Editor: Number,
     Admin: Number,
   },
+  active: {
+    type: Boolean,
+    default: false,
+  },
+  activeLink: String,
   refreshToken: String,
 });
 

@@ -1,6 +1,8 @@
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
 const validator = require('validator');
+const uuid = require('uuid');
+const mailer = require('../utils/mailer');
 
 const handleNewUser = async (req, res) => {
   // Check if inputs fields are filled
@@ -73,14 +75,23 @@ const handleNewUser = async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 5);
 
+    // Generate  activation link
+
+    const activeLink = uuid.v4();
+    const link = process.env.API_URL + '/active/' + activeLink;
+
     // Create and store the new user
 
     const result = await User.create({
       nickname: nickname,
       email: email,
       passwordHash: hashedPassword,
+      activeLink,
     });
 
+    // Sending activation email
+
+    mailer(nickname, email, link);
     res.status(201).json({ success: `New user ${nickname} created` });
   } catch (err) {
     res.status(500).json({ message: err.message });

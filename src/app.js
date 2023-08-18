@@ -20,8 +20,8 @@ app.use('/register', require('./routes/register'));
 app.use('/auth', require('./routes/auth'));
 app.use('/refresh', require('./routes/refresh'));
 app.use('/logout', require('./routes/logout'));
+app.use('/', require('./routes/active'));
 app.use(verifyJWT);
-app.use('/user', require('./routes/user'));
 
 connectDB();
 
